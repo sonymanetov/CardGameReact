@@ -34,8 +34,10 @@ export default class Pole extends Component {
     render() {
         const field = generateField(6, 9); //задаем кол-во строк и столбцов соответственно//
         const items = field.map((row: CKletka[]) => {
+
+            //тут размер и расстояние//
             return (
-                <Grid container item xs={12} spacing={1}> //тут размер и расстояние//
+                <Grid container item xs={12} spacing={1}> 
                     {drawRow(row)}
                 </Grid>
             );
