@@ -3,6 +3,7 @@ import Kletka, { CKletka } from './Kletka/Kletka';
 // import Cards from '././Card/card';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 //генерация поля, наполнения массива клетками//
 const generateField = (rows: number, columns: number) => {
@@ -22,24 +23,23 @@ const drawRow = (row: CKletka[]) => {
     return row.map((kletka: CKletka) => {
         return (
             <Grid item>
-                <Kletka kletka={kletka} />
+                <Kletka kletka = {kletka} />
             </Grid >
         );
     });
 }
 
-
 export default class Pole extends Component {
-  
     render() {
         const field = generateField(6, 9); //задаем кол-во строк и столбцов соответственно//
         const items = field.map((row: CKletka[]) => {
 
             //тут размер и расстояние//
             return (
-                <Grid container item xs={12} spacing={1}> 
+                <Grid container item xs={12} spacing={1}> <div className="Fish"> </div>
                     {drawRow(row)}
                 </Grid>
+
             );
         });
 
@@ -47,6 +47,6 @@ export default class Pole extends Component {
             <Grid container spacing={1}>
                 {items}
             </Grid>
-            )
+        )
     }
 }
