@@ -4,8 +4,7 @@ import Kletka, { CKletka } from './Kletka/Kletka';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-
-
+//генерация поля, наполнения массива клетками//
 const generateField = (rows: number, columns: number) => {
     let array: CKletka[][] = [];
     for (let i = 0; i < rows; i++) {
@@ -18,50 +17,7 @@ const generateField = (rows: number, columns: number) => {
 }
 
 
-//function FormRow() {
-//  //столбцы 8 штук
-//    return (
-//      <React.Fragment>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//        <Grid item xs={3}>
-//          <Paper ><Kletka /></Paper>
-//        </Grid>
-//      </React.Fragment>
-//    );
-//  }
-
+//отрисовка в соответствии с описанием клетки//
 const drawRow = (row: CKletka[]) => {
     return row.map((kletka: CKletka) => {
         return (
@@ -74,42 +30,21 @@ const drawRow = (row: CKletka[]) => {
 
 
 export default class Pole extends Component {
-// строки 6 штук 
-    
+  
     render() {
-        const field = generateField(6, 9);
+        const field = generateField(6, 9); //задаем кол-во строк и столбцов соответственно//
         const items = field.map((row: CKletka[]) => {
             return (
-                <Grid container item xs={12} spacing={1}>
+                <Grid container item xs={12} spacing={1}> //тут размер и расстояние//
                     {drawRow(row)}
                 </Grid>
             );
         });
-
-
 
         return (
             <Grid container spacing={1}>
                 {items}
             </Grid>
             )
-        //(
-        //    <>
-        //  <Grid container spacing={1}>
-        //<Grid container item xs={6} spacing={1}>
-        //  <FormRow />
-        //</Grid>
-        //<Grid container item xs={6} spacing={1}>
-        //  <FormRow />
-        //</Grid>
-        //<Grid container item xs={6} spacing={1}>
-        //  <FormRow />
-        //</Grid>
-        //<Grid container item xs={6} spacing={1}>
-        //  <FormRow />
-        //</Grid>
-        //  </Grid>
-        //    </>
-        //)
     }
 }
