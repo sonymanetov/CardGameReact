@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-//объ€вление класса и полей//
 export class CKletka {
     row: number
     col: number
@@ -15,23 +15,27 @@ interface IProps {
     kletka: CKletka
 }
 
-export default class Kletka extends Component<IProps> {
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        kletka: {
+            width: "100px",
+            height: "100px",
+            backgroundColor:"red"
+        },
+    }),
+);
 
-    constructor(props: IProps) {
-        super(props);
-    }
+export default function Kletka(props: IProps) {
 
-    //тут клетка определ€ет, что тыкнули на неЄ//
-    clickHandler = () => {
-        console.log(`row: ${this.props.kletka.row} col: ${this.props.kletka.col}`);
+    const classes = useStyles();
+
+    const clickHandler = () => {
+        console.log(`row: ${props.kletka.row} col: ${props.kletka.col}`);
     };
 
-    //внешний вид и мастшабирование клетки//
-    render() {
-        return (
-            <div>
-                <Button onClick={this.clickHandler} style={{ height: "100px" }}>______ ______</Button>
-            </div>
-        )
-    }
+    return (
+        <div className={classes.kletka} onClick={clickHandler}>
+            --
+        </div>
+    )
 }

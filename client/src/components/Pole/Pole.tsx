@@ -36,7 +36,7 @@ export default class Pole extends Component {
 
             //тут размер и расстояние//
             return (
-                <Grid container item xs={12} spacing={1}> <div className="Fish"> </div>
+                <Grid container item xs={12} spacing={0}> <div className="Fish"> </div>
                     {drawRow(row)}
                 </Grid>
 
@@ -44,7 +44,7 @@ export default class Pole extends Component {
         });
 
         return (
-            <Grid container spacing={1}>
+            <Grid container spacing={0}>
                 {items}
             </Grid>
         )
