@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Kletka, { CKletka } from './Kletka/Kletka';
+import Kartochka from '../Kartochka/Kartochka';
 // import Cards from '././Card/card';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -36,7 +37,7 @@ export default class Pole extends Component {
 
             //тут размер и расстояние//
             return (
-                <Grid container item xs={12} spacing={0}> <div className="Fish"> </div>
+                <Grid container item xs={12} spacing={0}  justify="center"> 
                     {drawRow(row)}
                 </Grid>
 
@@ -44,9 +45,12 @@ export default class Pole extends Component {
         });
 
         return (
-            <Grid container spacing={0}>
+            <>
+            <Grid container spacing={0} style={{margin:"20px"}}>
                 {items}
             </Grid>
+            <Kartochka/>
+            </>
         )
     }
 }
