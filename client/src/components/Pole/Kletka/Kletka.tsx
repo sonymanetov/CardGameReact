@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Kartochka from "../../Kartochka/Kartochka";
 
 export class CKletka {
     row: number
@@ -20,7 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
         kletka: {
             width: "100px",
             height: "100px",
-            backgroundColor:"red"
+            backgroundColor:"white",
+            border: "solid",
+            borderColor:"black"
         },
     }),
 );
@@ -35,7 +38,6 @@ export default function Kletka(props: IProps) {
 
     return (
         <div className={classes.kletka} onClick={clickHandler}>
-            --
-        </div>
+                    </div>
     )
 }
