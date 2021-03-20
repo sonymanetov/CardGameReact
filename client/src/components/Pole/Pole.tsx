@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Kletka, { CKletka } from './Kletka/Kletka';
 import Kartochka from '../Kartochka/Kartochka';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ICard } from '../Kartochka/KardTS';
+import { Console } from 'console';
+
 
 //генерация поля, наполнения массива клетками//
 const generateField = (rows: number, columns: number) => {
@@ -12,19 +14,22 @@ const generateField = (rows: number, columns: number) => {
     for (let i = 0; i < rows; i++) {
         array.push([]);
         for (let j = 0; j < columns; j++) {
+
             array[i].push(new CKletka(i, j));
         }
     }
+
+
     return array;
 }
 
 
 //отрисовка в соответствии с описанием клетки//
-const drawRow = (row: CKletka[]) => {
+const drawRow = (row: CKletka[], clickHandler: any) => {
     return row.map((kletka: CKletka) => {
         return (
             <Grid item>
-                <Kletka kletka = {kletka} />
+                <Kletka kletka = {kletka} callBack = {clickHandler} />
             </Grid >
         );
     });
@@ -57,15 +62,33 @@ const Cards : ICard[] =  [
     },
 ]
 
-export default class Pole extends Component {
-    render() {
+// export default class Pole extends Component {
+    export default function Pole() {
+    // render() {
+
+
+    const player1 = {x: 0, y: 0};
+    const player2 = {x: 8, y: 5};
+    let plArray = [player1, player2];
+
+    const [players, setPlayers] = useState(plArray);
+
+        const clickHandler = (kletka: CKletka) => {
+            console.log(JSON.stringify(kletka));
+            plArray[0] = {x: kletka.col, y: kletka.row}
+            setPlayers([plArray[0]]);
+        }
+        
         const field = generateField(6, 9); //задаем кол-во строк и столбцов соответственно//
+        for(let player of players) {
+            field[player.y][player.x] = new CKletka(player.y, player.x, true)
+        }
         const items = field.map((row: CKletka[]) => {
 
             //тут размер расположение//
             return (
                 <Grid container item xs={12} spacing={0}  justify="center"> 
-                    {drawRow(row)}
+                    {drawRow(row, clickHandler)}
                 </Grid>
 
             );
@@ -85,5 +108,5 @@ export default class Pole extends Component {
             
             </>
         )
-    }
+    // }
 }
