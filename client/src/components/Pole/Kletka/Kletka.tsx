@@ -8,8 +8,8 @@ export class CKletka {
     row: number
     col: number
     constructor(x: number, y: number) {
-        this.col = x;
-        this.row = y;
+        this.row = x+1;
+        this.col = y+1;
     }
 }
 
@@ -34,7 +34,7 @@ export default function Kletka(props: IProps) {
     const classes = useStyles();
 
     const clickHandler = () => {
-        console.log(`row: ${props.kletka.row} col: ${props.kletka.col}`);
+        console.log(`col: ${props.kletka.col} row: ${props.kletka.row}`);
     };
 
     return (
