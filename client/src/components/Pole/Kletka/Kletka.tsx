@@ -9,12 +9,13 @@ import { callbackify } from 'util';
 export class CKletka {
     row: number
     col: number
-    player ? : boolean
-    constructor(x: number, y: number, player = false) {
+    playerId  : number | null
+    image?: string;
+    constructor(x: number, y: number, playerId , image ="") {
         this.row = x;
         this.col = y;
-        this.player = player;
-    }
+        this.playerId = playerId;
+        this.image = image    }
 }
 
 interface IProps {
@@ -39,7 +40,7 @@ export default function Kletka(props: IProps) {
     const[isClicked, setIsClicked] = useState(false);
 
     const classes = useStyles();
-    if (props.kletka.player) { console.log('here');}
+    if (props.kletka.playerId) { console.log('here');}
 
     const clickHandler = () => {
         console.log(`col: ${props.kletka.col} row: ${props.kletka.row}`);
@@ -49,8 +50,9 @@ export default function Kletka(props: IProps) {
 
     return (
         <div className={classes.kletka} onClick={clickHandler} >
-        { props.kletka.player && 
-        <img src={LeftPlayerImg} /> }
+        { props.kletka.playerId && props.kletka.image && 
+        // <img src={require(`../../../assets/${props.kletka.image}`)} /> }
+        <img src={LeftPlayerImg} />}
                     </div>
     )
 }
