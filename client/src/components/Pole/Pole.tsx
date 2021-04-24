@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { ICard } from '../Kartochka/KardTS';
 import { Console } from 'console';
+import { useStoreon } from 'storeon/react';
+import { PlayerState, PlayerEvents } from '../store';
 
 
 //генерация поля, наполнения массива клетками//
@@ -15,7 +17,7 @@ const generateField = (rows: number, columns: number) => {
         array.push([]);
         for (let j = 0; j < columns; j++) {
 
-            array[i].push(new CKletka(i, j));
+            array[i].push(new CKletka(i, j, null));
         }
     }
 
@@ -64,6 +66,10 @@ const Cards : ICard[] =  [
 
 // export default class Pole extends Component {
     export default function Pole() {
+
+        const {players,currentPlayerHod, dispatch} = useStoreon<PlayerState, PlayerEvents>('players', "currentPlayerHod")
+
+      
     // render() {
 
 
@@ -71,17 +77,19 @@ const Cards : ICard[] =  [
     const player2 = {x: 8, y: 5};
     let plArray = [player1, player2];
 
-    const [players, setPlayers] = useState(plArray);
+    // const [players, setPlayers] = useState(plArray);
 
         const clickHandler = (kletka: CKletka) => {
-            console.log(JSON.stringify(kletka));
-            plArray[0] = {x: kletka.col, y: kletka.row}
-            setPlayers([plArray[0]]);
+            dispatch('player/hod', {playerId: currentPlayerHod, x: kletka.col, y:kletka.row})
+            dispatch('player/currentPlayerHod', currentPlayerHod === 1 ? 2 : 1)
+            // console.log(JSON.stringify(kletka));
+            // plArray[0] = {x: kletka.col, y: kletka.row}
+            // setPlayers([plArray[0]]);
         }
         
         const field = generateField(6, 9); //задаем кол-во строк и столбцов соответственно//
         for(let player of players) {
-            field[player.y][player.x] = new CKletka(player.y, player.x, true)
+            field[player.position.y][player.position.x] = new CKletka(player.position.y, player.position.x, player.id , player.image)
         }
         const items = field.map((row: CKletka[]) => {
 
@@ -100,8 +108,8 @@ const Cards : ICard[] =  [
                 {items}
             </Grid>
             <Grid container spacing={2} style={{margin:"200px"}}>
-                {Cards.map((item) => {
-                    return <Kartochka kartochka={item}/>;
+                {Cards.map((item,i) => {
+                    return <Kartochka kartochka={item} key={i}/>;
                 })
             }
             </Grid>
